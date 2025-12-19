@@ -6,10 +6,16 @@ app.secret_key = "supersecret"
 # Login page
 @app.route("/", methods=["GET", "POST"])
 def login():
+    users = {
+        "admin" : "123",
+        "sushank" :"456",
+        "dikshit" : "789"
+
+    }
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        if username == "admin" and password == "123":
+        if username in users and users[username] == password:
             session["user"] = username
             return redirect(url_for("welcome"))
         else:
